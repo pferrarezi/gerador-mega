@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #resultado {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    
+    
+</head>
+
+<body>
+    <button onclick="gerarSorteios()">Gerar Sorteios</button>
+    <div id="resultado"></div>
+    <script type="text/javascript">
+        function geraDezenas(qtdSorteios, qtdDezenas, numsLow, numsHigh) {
+            let dezenas = [];
+
+            for (let i = 0; i < qtdSorteios; i++) {
+                let sorteio = [];
+                for (let j = 0; j < qtdDezenas; j++) {
+                    sorteio.push(Math.floor(Math.random() * (numsHigh[j] - numsLow[j] + 1)) + numsLow[j]);
+                }
+                dezenas.push(sorteio.sort((a, b) => a - b));
+            }
+            return dezenas;
+        }
+
+        function gerarSorteios() {
+            let qtdDezenas = 6;
+            let qtdSorteios = 2;
+
+            let numsLow = [1, 5, 10, 20, 30, 40];
+            let numsHigh = [30, 40, 50, 60, 60, 60];
+
+            let result = geraDezenas(qtdSorteios, qtdDezenas, numsLow, numsHigh);
+            let resultText = "";
+
+            for (let i = 0; i < result.length; i++) {
+                resultText += result[i].join(" - ") + "<br>";
+            }
+
+            document.getElementById("resultado").innerHTML = resultText;
+        }
+    </script>
+</body>
+
+</html>
